@@ -1,0 +1,37 @@
+DEBUG 2018-11-25 13:18:32,884: 	 Executing command: 'submit'
+DEBUG 2018-11-25 13:18:32,885: 	 Found CRAB cache file /uscms/home/loukas/.crab3
+DEBUG 2018-11-25 13:18:32,892: 	 Checking credentials
+DEBUG 2018-11-25 13:18:32,892: 	 Found proxy file /tmp/x509up_u45540
+DEBUG 2018-11-25 13:18:32,892: 	 Getting proxy life time left
+DEBUG 2018-11-25 13:18:32,994: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u45540 -timeleft
+ output : 41435
+
+ error: 
+ retcode : 0
+DEBUG 2018-11-25 13:18:33,097: 	 Executing : 
+ command : voms-proxy-info -file /tmp/x509up_u45540 -actimeleft
+ output : 41433
+
+ error: 
+ retcode : 0
+DEBUG 2018-11-25 13:18:33,097: 	 Proxy valid for 11:30:35 hours
+INFO 2018-11-25 13:18:33,098: 	 Will use CRAB configuration file crabConfig_MetAndPuAnalStep3.py
+DEBUG 2018-11-25 13:18:33,098: 	 Loading CRAB configuration file.
+DEBUG 2018-11-25 13:18:35,112: 	 Will use CRAB Analysis plugin (i.e. will run an analysis job type).
+ERROR 2018-11-25 13:18:35,113: 	 Working area '/uscms_data/d3/loukas/das2019/METAndPU/lgtests/CMSSW_9_4_12/src/MetAndPu/MetAndPuAnal/test/crab_projects/crab_my_CRAB_project_directory' already exists 
+Please change the requestName in the config file
+ERROR 2018-11-25 13:18:35,114: 	 Caught exception
+Traceback (most recent call last):
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1809-comp/bin/crab", line 160, in <module>
+    client()
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1809-comp/bin/crab", line 146, in __call__
+    self.cmd = sub_cmd(self.logger, args[1:])
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1809-comp/lib/python2.7/site-packages/CRABClient/Commands/submit.py", line 34, in __init__
+    SubCommand.__init__(self, logger, cmdargs, disable_interspersed_args=True)
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1809-comp/lib/python2.7/site-packages/CRABClient/Commands/SubCommand.py", line 307, in __init__
+    getattr(self.configuration.General, 'requestName', None))
+  File "/cvmfs/cms.cern.ch/crab3/slc6_amd64_gcc493/cms/crabclient/3.3.1809-comp/lib/python2.7/site-packages/CRABClient/ClientUtilities.py", line 404, in createWorkArea
+    raise ConfigException("Working area '%s' already exists \nPlease change the requestName in the config file" % fullpath)
+ConfigException: Working area '/uscms_data/d3/loukas/das2019/METAndPU/lgtests/CMSSW_9_4_12/src/MetAndPu/MetAndPuAnal/test/crab_projects/crab_my_CRAB_project_directory' already exists 
+Please change the requestName in the config file

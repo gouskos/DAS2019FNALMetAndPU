@@ -1,0 +1,190 @@
+// -*- C++ -*-
+//
+// Package:    MetAndPu/MetAndPuAnalStep4
+// Class:      MetAndPuAnalStep4
+// 
+/**\class MetAndPuAnalStep4 MetAndPuAnalStep4.cc MetAndPu/MetAndPuAnal/plugins/MetAndPuAnalStep4.cc
+
+ Description: [one line class summary]
+
+ Implementation:
+     [Notes on implementation]
+*/
+//
+// Original Author:  Loukas Gouskos
+//         Created:  Tue, 20 Nov 2018 23:02:05 GMT
+//
+//
+
+
+// system include files
+#include <memory>
+
+// user include files
+#include "FWCore/Framework/interface/Frameworkfwd.h"
+#include "FWCore/Framework/interface/one/EDAnalyzer.h"
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/MakerMacros.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "TH1.h"
+
+#include "DataFormats/PatCandidates/interface/MET.h"
+#include "DataFormats/Common/interface/TriggerResults.h"
+#include "FWCore/Common/interface/TriggerNames.h"
+
+
+//ROOT includes                                                                                                                                               
+#include "TTree.h"
+#include <TFile.h>
+#include <TROOT.h>
+#include "TBranch.h"
+#include <string>
+#include <vector>
+#include "TSystem.h"
+#include "TVector3.h"
+#include "TLorentzVector.h"
+
+//
+// class declaration
+//
+
+// If the analyzer does not use TFileService, please remove
+// the template argument to the base class so the class inherits
+// from  edm::one::EDAnalyzer<> and also remove the line from
+// constructor "usesResource("TFileService");"
+// This will improve performance in multithreaded jobs.
+
+class MetAndPuAnalStep4 : public edm::one::EDAnalyzer<edm::one::SharedResources>  {
+   public:
+      explicit MetAndPuAnalStep4(const edm::ParameterSet&);
+      ~MetAndPuAnalStep4();
+
+      static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+
+
+   private:
+      virtual void beginJob() override;
+      virtual void analyze(const edm::Event&, const edm::EventSetup&) override;
+      virtual void endJob() override;
+
+      // ----------member data ---------------------------
+  bool doprints_;
+  //  edm::EDGetTokenT<pat::METCollection> metToken_;
+  edm::EDGetTokenT<edm::TriggerResults> metFiltersToken_;
+  std::string beamHaloFilter_;
+  std::string hbheFilter_;
+  std::string hbheIsoFilter_;
+  std::string ecalTPFilter_;
+  std::string badPFMuonFilter_;
+  std::string badChargedCandFilter_;
+  std::string eeBadScFilter_;
+
+};
+
+//
+// constants, enums and typedefs
+//
+
+//
+// static data member definitions
+//
+
+//
+// constructors and destructor
+//
+MetAndPuAnalStep4::MetAndPuAnalStep4(const edm::ParameterSet& iConfig):
+  //  metToken_(consumes<pat::METCollection>(iConfig.getParameter<edm::InputTag>("mets"))),
+  metFiltersToken_(consumes<edm::TriggerResults>(iConfig.getParameter<edm::InputTag>("metFilters")))
+{}
+/*
+  beamHaloFilter_       = iConfig.getParameter<std::string>("beamHaloFilterSel");
+  hbheFilter_           = iConfig.getParameter<std::string>("hbheFilterSel");
+  hbheIsoFilter_        = iConfig.getParameter<std::string>("hbheIsoFilterSel");
+  ecalTPFilter_         = iConfig.getParameter<std::string>("ecalTPFilterSel");
+  badPFMuonFilter_      = iConfig.getParameter<std::string>("badPFMuonFilterSel");
+  badChargedCandFilter_ = iConfig.getParameter<std::string>("badChargedCandFilterSel");
+  eeBadScFilter_        = iConfig.getParameter<std::string>("eeBadScFilterSel");*/
+
+//}
+
+
+MetAndPuAnalStep4::~MetAndPuAnalStep4()
+{
+    // do anything here that needs to be done at desctruction time
+   // (e.g. close files, deallocate resources etc.)
+  //  file->Close();
+ }
+
+
+//
+// member functions
+//
+
+// ------------ method called for each event  ------------
+void
+MetAndPuAnalStep4::analyze(const edm::Event& iEvent, const edm::EventSetup& iSetup)
+{
+   
+   using namespace edm;
+   /*
+   edm::Handle<pat::METCollection> mets;
+   iEvent.getByToken(metToken_, mets);
+   const pat::MET &met = mets->front();*/
+
+   edm::Handle<edm::TriggerResults> metFilters; 
+   iEvent.getByToken(metFiltersToken_, metFilters);
+   const edm::TriggerNames &names = iEvent.triggerNames(*metFilters);
+
+
+   for (unsigned int i = 0, n = metFilters->size(); i < n; ++i) {
+     std::cout << names.triggerName(i) << std::endl;
+     /*
+     if (names.triggerName(i) == HBHENoiseFilter_Selector_)
+       passFilterHBHE=metFilters->accept(i);
+     if (names.triggerName(i) == EEBadScNoiseFilter_Selector_)
+       passFilterEEBadSC=metFilters->accept(i);*/
+   }
+
+
+#ifdef THIS_IS_AN_EVENT_EXAMPLE
+   Handle<ExampleData> pIn;
+   iEvent.getByLabel("example",pIn);
+#endif
+   
+#ifdef THIS_IS_AN_EVENTSETUP_EXAMPLE
+   ESHandle<SetupData> pSetup;
+   iSetup.get<SetupRecord>().get(pSetup);
+#endif
+}
+
+
+// ------------ method called once each job just before starting event loop  ------------
+void 
+MetAndPuAnalStep4::beginJob()
+{
+}
+
+// ------------ method called once each job just after ending the event loop  ------------
+void 
+MetAndPuAnalStep4::endJob() 
+{
+  //  file->cd();
+  //tree->Write();
+  //  file->Write();
+}
+
+// ------------ method fills 'descriptions' with the allowed parameters for the module  ------------
+void
+MetAndPuAnalStep4::fillDescriptions(edm::ConfigurationDescriptions& descriptions) {
+  //The following says we do not know what parameters are allowed so do no validation
+  // Please change this to state exactly what you do use, even if it is no parameters
+  edm::ParameterSetDescription desc;
+  desc.setUnknown();
+  descriptions.addDefault(desc);
+}
+
+//define this as a plug-in
+DEFINE_FWK_MODULE(MetAndPuAnalStep4);
