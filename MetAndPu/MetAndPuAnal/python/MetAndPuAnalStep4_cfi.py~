@@ -1,5 +1,0 @@
-import FWCore.ParameterSet.Config as cms
-
-metandpuanalstep4 = cms.EDAnalyzer('MetAndPuAnalStep4',
-                                   metFilters = cms.InputTag("TriggerResults")
-                                   )
