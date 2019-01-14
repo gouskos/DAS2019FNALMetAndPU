@@ -19,7 +19,8 @@ process.source = cms.Source(
     "PoolSource",
     fileNames = cms.untracked.vstring([
             #'file:/eos/uscms/store/user/cmsdas/2019/short_exercises/METAndPU/data/handson1_dy1jet_m50_fall17_part.root',
-            'file:/eos/uscms/store/user/cmsdas/2019/short_exercises/METAndPU/data/handson1_dylljets_amcatnlo.root',
+            #'file:/eos/uscms/store/user/cmsdas/2019/short_exercises/METAndPU/data/handson1_dylljets_amcatnlo.root',
+            '/store/user/cmsdas/2019/short_exercises/METAndPU/data/handson1_dylljets_amcatnlo.root',
             ]
                                       )
     )

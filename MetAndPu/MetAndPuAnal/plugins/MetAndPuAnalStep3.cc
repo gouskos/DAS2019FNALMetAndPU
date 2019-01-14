@@ -239,9 +239,9 @@ MetAndPuAnalStep3::analyze(const edm::Event& iEvent, const edm::EventSetup& iSet
 
 
    // skip the event if less than 2 muons
-   std::cout << " before = " << dimu.size() << "\n";
+
    if (dimu.size()<1) { return; }
-   std::cout << " after = " << dimu.size() << "\n";
+
 
    // calculate boson recoil
    TLorentzVector metT1p4;       metT1p4.SetPtEtaPhiM(met.pt(),0.,met.phi(),0.);

@@ -18,7 +18,7 @@ process.maxEvents = cms.untracked.PSet( input = cms.untracked.int32(1) )
 process.source = cms.Source(
     "PoolSource",
     fileNames = cms.untracked.vstring([
-            'file:/eos/uscms/store/user/cmsdas/2019/short_exercises/METAndPU/data/handson1_dy1jet_m50_fall17_part.root',
+            '/store/user/cmsdas/2019/short_exercises/METAndPU/data/handson1_dy1jet_m50_fall17_part.root',
             ]
                                       )
     )
