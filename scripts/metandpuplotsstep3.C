@@ -241,7 +241,7 @@ TCanvas *createCanvas(TString cName, TLegend *leg, std::vector<TH1F*> hist,TStri
       if (cName.Contains("scale")) { hist[i0]->GetYaxis()->SetRangeUser(0.5,1.2); }
       if (cName.Contains("para")) { hist[i0]->GetYaxis()->SetRangeUser(10.,60.); }
       if (cName.Contains("perp")) { hist[i0]->GetYaxis()->SetRangeUser(0.,30.); }
-      if (cName.Contains("vspt")) { hist[i0]->GetXaxis()->SetRangeUser(50.,350.); }
+      if (cName.Contains("vspt")) { hist[i0]->GetXaxis()->SetRangeUser(50.,300.); }
       hist[i0]->GetXaxis()->SetNdivisions(109);
       hist[i0]->GetYaxis()->SetLabelSize(0.08);
       hist[i0]->GetYaxis()->SetTitleSize(0.08);
