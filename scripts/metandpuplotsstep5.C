@@ -15,7 +15,7 @@ void metandpuplotsstep5() {
   gStyle->SetPalette(1);
   setTDRStyle();
 
-  TFile *f_ = TFile::Open("/eos/uscms/store/user/cmsdas/2019/short_exercises/METAndPU/data/metandpu_step3.root","READONLY");
+  TFile *f_ = TFile::Open("root://cmseos.fnal.gov//store/user/cmsdas/2019/short_exercises/METAndPU/data/metandpu_step3.root","READONLY");
   // /eos/uscms/store/user/loukas/DASTEST/DYJetsToLL_M-50_TuneCP5_13TeV-amcatnloFXFX-pythia8/CRAB3_LGDAS2019_TRY/181129_234304/0000/metandpu_step3.root
   TTree *t_ = (TTree*)f_->Get("metandpuanalstep3/tree");
 
